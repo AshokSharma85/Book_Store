@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <header>
+    <img src="../assets/BookstoreAdminLogo.png" alt="logo">
+    <ul>
+      <li><a>Home</a></li>
+      <li><a>Users</a></li>
+      <li><a>Categories</a></li>
+      <li><a>Books</a></li>
+      <li><a>Customers</a></li>
+      <li><a>Reviews</a></li>
+      <li><a>Orders</a></li>
+      <li><a>Sign Out</a></li><br>
+      <span>Welcome (Admin)</span>
+    </ul>
+    
+  </header>
+
+  <br>
+  <div>
+    <div>
+      <button type="button" (click)="toggleAddAdmin()" class="btn btn-secondary">Add Admin</button>
+      <button type="button" id="btn" (click)="toggleManageAdmin()" class="btn btn-secondary">Manage Admins</button>
+    </div>
+    
+    
+
+
+
+
+    <div id="add admin" *ngIf="checkAddAdmin">
+                
+      <div >
+      <div id="formData" class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto  form p-3 jumbotron">
+         <u> <h2 class="text-center" >Create New Admin</h2></u>
+      
+        <form  name="formdata" #formdata="ngForm" novalidate (ngSubmit)="addAdmin(formdata)">
+      
+            <div *ngIf="errorMessageCondition" class="alert alert-danger">
+              {{errorMessage}}
+              </div>
+          <div>
+         <b> Email</b>
+         <input type="email" placeholder="Enter email" id="id" name="email"  [(ngModel)]="addAdmins.email" #emailId="ngModel" required pattern="" class="form-control border border-dark" >
+          <div *ngIf="emailId.invalid && emailId.touched" class="alert alert-danger">
+            <span *ngIf="emailId.errors.required">*Email is Mandatory</span>
+            <span *ngIf="emailId.errors.pattern">*Please Enter Valid Email</span>
+            </div>
+        
+        </div>
+        <br>
+        <div><b>Full Name</b>
+          <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="addAdmins.fullName" #na="ngModel" required class="form-control border border-dark" >
+          <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
+            <span *ngIf="na.errors.required">*Full Name is Mandatory</span>
+          
+            </div>
+        
+        </div>
+       
+      <br>
+      <div><b>Password</b>
+        <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="addAdmins.password" #pass="ngModel" required pattern ="'^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'"  class="form-control border border-dark " >
+        <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
+          <span *ngIf="pass.errors.required">*Password is Mandatory</span>
+          <span *ngIf="pass.errors.pattern">*Password must have at least one special char,numeric and capital value errors</span>
+        
+          </div>
+
+      <br>
+      </div>
+        <div>
+        <input type="submit" value="Submit" id="submit" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button  routerLink="/home"  class="btn btn-light">Cancel </button>
+      </div>
+      </form>
+    </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div id="manage admin" *ngIf="checkManageAdmin">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email Address</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tr *ngFor="let admin of admins">
+          <th>{{admin.adminId}}</th>
+          <th>{{admin.fullName}}</th>
+          <th>{{admin.email}}</th>
+          <th><button type="button" class="btn btn-primary">update</button></th>
+          <th><button type="button" class="btn btn-primary">delete</button></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <p>Copyright (c) 2020 by Evergreen Books Co., Ltd</p>
+  </footer>
+
+
+</body>
+
+</html>

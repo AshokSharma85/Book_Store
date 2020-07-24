@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+      
+<header>
+        <img src="../assets/BookstoreAdminLogo.png" alt="logo">
+      <ul>
+        <li><a>Users</a></li>
+        <li><a>Categories</a></li>
+        <li><a>Books</a></li>
+        <li><a>Customers</a></li>
+        <li><a>Reviews</a></li>
+        <li><a>Orders</a></li>
+      </ul>
+      </header>
+      <div>
+        <br>
+        <div>
+        
+          <button type="button" (click)="toggleAddCustomer()" class="btn btn-secondary">Add Customer</button>
+         
+          <button type="button" id="btn" (click)="toggleManageCustomer()" class="btn btn-secondary">Manage Customer</button>
+        </div>
+        <br>
+
+        <div id="add admin" *ngIf="checkAddCustomer">
+          
+        </div>
+        
+
+
+        <div id="manage admin" *ngIf="checkManageCustomer">
+         manage customer
+        </div>
+      </div>
+    
+      
+      <footer>
+            <p>Copyright (c) 2017 by Evergreen Books Co., Ltd</p>
+          </footer>
+       
+          
+</body>
+</html>
+
+
+
+
+
+
+
