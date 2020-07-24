@@ -67,10 +67,9 @@
             </div>
         
         </div>
-       
       <br>
       <div><b>Password</b>
-        <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="addAdmins.password" #pass="ngModel" required pattern ="'^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'"  class="form-control border border-dark " >
+        <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="addAdmins.password" #pass="ngModel" required pattern =""  class="form-control border border-dark " >
         <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
           <span *ngIf="pass.errors.required">*Password is Mandatory</span>
           <span *ngIf="pass.errors.pattern">*Password must have at least one special char,numeric and capital value errors</span>
@@ -80,7 +79,7 @@
       <br>
       </div>
         <div>
-        <input type="submit" value="Submit" id="submit" >
+        <input type="submit" value="Submit" id="submit" [disabled]="!formdata.valid">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button  routerLink="/home"  class="btn btn-light">Cancel </button>
       </div>
@@ -98,26 +97,6 @@
 
 
 
-    <div id="manage admin" *ngIf="checkManageAdmin">
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email Address</th>
-            <th>Update</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tr *ngFor="let admin of admins">
-          <th>{{admin.adminId}}</th>
-          <th>{{admin.fullName}}</th>
-          <th>{{admin.email}}</th>
-          <th><button type="button" class="btn btn-primary">update</button></th>
-          <th><button type="button" class="btn btn-primary">delete</button></th>
-        </tr>
-      </table>
-    </div>
   </div>
 
   <footer>
