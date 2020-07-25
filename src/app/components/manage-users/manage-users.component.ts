@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ManageUsersService } from 'src/app/services/manage-users.service';
 import { Admin } from 'src/app/models/admin';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +17,7 @@ export class ManageUsersComponent implements OnInit {
   addAdmins:Admin=new Admin();
   errorMessage;
   errorMessageCondition=false;
-
+  updateAdminId: any;
 
   showModal=false;
   adminId:any;
@@ -30,17 +29,27 @@ export class ManageUsersComponent implements OnInit {
   
   checkAddAdmin: boolean = false;
   checkManageAdmin: boolean = true;
+  checkEditAdmin: boolean = false;
   public toggleAddAdmin(): void {
     if (this.checkAddAdmin == false) {
       this.checkAddAdmin = true;
       this.checkManageAdmin = false;
+      this.checkEditAdmin = false;
     }
   }
   public toggleManageAdmin(): void {
     if (this.checkManageAdmin == false) {
       this.checkAddAdmin = false;
       this.checkManageAdmin = true;
+      this.checkEditAdmin = false;
     }
+  }
+
+  public toggleEditAdmin(updateAdminId): void{
+    this.updateAdminId = updateAdminId;
+    this.checkEditAdmin = true;
+    this.checkAddAdmin = false;
+    this.checkManageAdmin = false;
   }
 
   getAllUsers():void{
@@ -123,6 +132,29 @@ export class ManageUsersComponent implements OnInit {
   }
 
 
+  editAdmin(form: NgForm){
+
+    
+    this.manageUsersService.editAdmin(this.updateAdminId,this.addAdmins).subscribe(data=>
+      {
+      form.resetForm();
+      
+      this.errorMessageCondition=false;
+      console.log("Data is "+data)
+      alert(data); 
+      this.getAllUsers();
+      this.toggleManageAdmin();
+      
+      },
+    
+      error=>
+    {
+      this.errorMessageCondition=true;
+      this.errorMessage=error.error;
+      console.log("erroor occured",error);
+    }
+    );
+  }
 
 
 

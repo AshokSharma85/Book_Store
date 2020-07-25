@@ -42,4 +42,8 @@ export class ManageUsersService {
   {
      return this.http.get(this.url+"/admin/getallcustomers/"+adminEmail+"/"+adminPassword+"/"+adminId+"/"+pageNumber);
   }
+
+  editAdmin(adminId: number,admin:Admin){
+    return this.http.put(this.url+"/admin/editAdmin/"+adminId,admin,{responseType:'text'});
+}
 }

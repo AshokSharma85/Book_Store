@@ -119,13 +119,13 @@
 
   <br>
 
-  <div id="manage admin" *ngIf="checkManageCustomer">
+  <div class="container" *ngIf="checkManageCustomer">
   <div class="container">
     <div class="alert alert-danger" *ngIf="exceptionResponse!=null">
         <strong>{{exceptionResponse.reason}}</strong>
     </div>
     <img *ngIf="queryResponse==null" src="../../assets/no-data-found.png" alt="No Customers Found!" height="460" width="460">
-    <table class="table table-hover table-bordered" *ngIf="queryResponse!=null">
+    <table class="table table-borderless" *ngIf="queryResponse!=null">
         <thead class="thead-dark">
             <tr>
               <th>CustomerId</th>
@@ -134,8 +134,8 @@
               <th>Phone Number</th>
               
               <th>Country</th>
-              <th>Update</th>
-              <th>Delete</th>
+              <th>Action</th>
+              
             </tr>
         </thead>
 
@@ -149,11 +149,11 @@
                 <td>{{customer.country}}</td>
                 <!-- (click)="updateCustomer(customer)"
                 (click)="deleteCustomer(customer)" -->
-                <td><button type="button" class="btn btn-primary" >Update</button></td>
-                <td><button type="button" class="btn btn-danger" (click)="openDialog(customer.emailAddress)" >Delete</button></td>
+                <td><button type="button" class="btn btn-primary" >Update</button>&nbsp;
+                <button type="button" class="btn btn-danger" (click)="openDialog(customer.emailAddress)" >Delete</button></td>
             </tr>
             <tr>
-                <td colspan="7">
+                <td colspan="6">
                     <ul class="pagination pagination-sm justify-content-center">
                         <li class="page-item" [class.active]="queryResponse?.currentPageNumber==i+1"
                             *ngFor="let item of noOfPages;let i=index">

@@ -97,3 +97,14 @@ b{
     top: 50%;
     transform: translate(0%,-50%);
 }
+table { 
+    background-color: rgb(176, 188, 199);
+    }
+    table th{
+        text-align: center;
+    }
+    table td{
+        text-align:center;
+    }
+    
+    
