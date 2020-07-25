@@ -84,3 +84,16 @@ footer{
 b{
     font-size: 120%;
 }
+
+.modal
+{
+    display: block;
+    
+
+}
+.modal-dialog
+{
+    position: relative;
+    top: 50%;
+    transform: translate(0%,-50%);
+}

@@ -32,12 +32,7 @@
       <button type="button" (click)="toggleAddCustomer()" class="btn btn-secondary">Add Customer</button>
       <button type="button" id="btn" (click)="toggleManageCustomer()" class="btn btn-secondary">Manage Customers</button>
     </div>
-    
-    
-    
-
-
-
+  
     <div id="add admin" *ngIf="checkAddCustomer">
                 
       <div >
@@ -58,7 +53,6 @@
             </div>
         
         </div>
-        <br>
         <div><b>Full Name</b>
           <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="customerInformation.fullName" #na="ngModel" required pattern=""class="form-control border border-dark" >
           <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
@@ -68,16 +62,13 @@
         
         </div>
        
-      <br>
       <div><b>Password</b>
         <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="customerInformation.password" #pass="ngModel" required pattern =""  class="form-control border border-dark " >
         <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
           <span *ngIf="pass.errors.required">*Password is Mandatory</span>
           <span *ngIf="pass.errors.pattern">*Password contain one number,one character and one special </span>
         
-          </div>
-
-      <br>
+        </div>
       </div>
 
       
@@ -87,8 +78,6 @@
             <span *ngIf="phoneNumber.errors.required">*Phone Number is Mandatory</span>
             <span *ngIf="phoneNumber.errors.pattern">*Please Enter Valid Phone Number</span>
             </div>
-  
-        <br>
         </div>
 
         <div><b>City</b>
@@ -97,8 +86,6 @@
               <span *ngIf="city.errors.required">*City is Mandatory</span>
               <span *ngIf="city.errors.pattern">*Please Enter Valid City Name</span>
               </div>
-    
-          <br>
           </div>
 
           <div><b>Zip Code</b>
@@ -108,7 +95,6 @@
                 <span *ngIf="zipCode.errors.pattern">*Please Enter Valid Zip Code</span>
                 </div>
       
-            <br>
             </div>
             <div><b>Country</b>
                 <input type="text" placeholder="Enter country" id="country" name="country"   [(ngModel)]="customerInformation.country" #country="ngModel" required pattern="[a-zA-Z]{3,64}" class="form-control border border-dark " >
@@ -117,24 +103,89 @@
                   <span *ngIf="country.errors.pattern">*Please Enter Valid Country Name</span>
                   </div>
         
-              <br>
-              </div>
+                    </div>
 
       
         <div>
         <input type="submit" value="Submit" id="submit" [disabled]="!formdata.valid">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button  routerLink="/home"  class="btn btn-light">Cancel </button>
+        <button  (click)="toggleManageCustomer()"  class="btn btn-light">Cancel </button>
       </div>
       </form>
     </div>
       </div>
     </div>
-
-
-
-
   </div>
+
+  <br>
+
+  <div id="manage admin" *ngIf="checkManageCustomer">
+  <div class="container">
+    <div class="alert alert-danger" *ngIf="exceptionResponse!=null">
+        <strong>{{exceptionResponse.reason}}</strong>
+    </div>
+    <img *ngIf="queryResponse==null" src="../../assets/no-data-found.png" alt="No Customers Found!" height="460" width="460">
+    <table class="table table-hover table-bordered" *ngIf="queryResponse!=null">
+        <thead class="thead-dark">
+            <tr>
+              <th>CustomerId</th>
+              <th>Email Address</th>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              
+              <th>Country</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let customer of queryResponse?.list">
+                <td>{{customer.customerId}}</td>
+                <td>{{customer.emailAddress}}</td>
+                <td>{{customer.fullName}}</td>
+                <td>{{customer.phoneNumber}}</td>
+        
+                <td>{{customer.country}}</td>
+                <!-- (click)="updateCustomer(customer)"
+                (click)="deleteCustomer(customer)" -->
+                <td><button type="button" class="btn btn-primary" >Update</button></td>
+                <td><button type="button" class="btn btn-danger" (click)="openDialog(customer.emailAddress)" >Delete</button></td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <ul class="pagination pagination-sm justify-content-center">
+                        <li class="page-item" [class.active]="queryResponse?.currentPageNumber==i+1"
+                            *ngFor="let item of noOfPages;let i=index">
+                            <a class="page-link" (click)="getAllCustomers(i+1)">
+                                {{i+1}}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+
+<div class="modal" *ngIf=showModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete User</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete the Customer?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" (click)="deleteCustomer()">Delete</button>
+        <button class="btn btn-default" (click)="closeDialog()">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
 
   <footer>
     <p>Copyright (c) 2020 by Evergreen Books Co., Ltd</p>

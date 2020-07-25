@@ -10,24 +10,36 @@ import { CustomerInformation } from '../models/customer-information';
 export class ManageUsersService {
 
   constructor(private http:HttpClient) { }
-
+  url:string="http://localhost:1138";
 
   getAllUsers():Observable<any>
   {
-    return this.http.get("http://localhost:1138/admin/getallusers/101")
+    return this.http.get(this.url+"/admin/getallusers/13740");
   }
 
   addAdmin(admin:Admin):Observable<any>
   {
-    console.log(admin);
-    let url="http://localhost:1138/admin/addAdmin";
-    return this.http.post(url,admin,{responseType:'text'});
+    return this.http.post(this.url+"/admin/addAdmin",admin,{responseType:'text'});
   }
 
   addCustomer(customerInformartion:CustomerInformation):Observable<any>
   {
-    console.log(customerInformartion);
-    let url="http://localhost:1138//admin/addcustomers";
-    return this.http.post(url,customerInformartion,{responseType:'text'});
+    return this.http.post(this.url+"/admin/addcustomers",customerInformartion,{responseType:'text'});
+  }
+
+
+  deleteUser(deleteUser:any)
+  {
+    return this.http.delete<any>(this.url+"/admin/deleteUser/"+deleteUser);
+  }
+
+  deleteCustomer(deleteCustomer:any)
+  {
+    return this.http.delete<any>(this.url+"/admin/deleteCustomer/"+deleteCustomer);
+  }
+
+  getAllCustomers(adminEmail:string,adminPassword:string,adminId:number,pageNumber:number)
+  {
+     return this.http.get(this.url+"/admin/getallcustomers/"+adminEmail+"/"+adminPassword+"/"+adminId+"/"+pageNumber);
   }
 }

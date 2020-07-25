@@ -90,3 +90,17 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+
+.modal
+{
+    display: block;
+    
+
+}
+.modal-dialog
+{
+    position: relative;
+    top: 50%;
+    transform: translate(0%,-50%);
+}

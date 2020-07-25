@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ManageUsersService } from '../../services/manage-users.service';
 import { CustomerInformation } from '../../models/customer-information';
 import { NgForm } from '@angular/forms';
+import { QueryResponseDTO } from '../../models/query-response-dto';
+import { ExceptionResponseDTO } from '../../models/exception-response-dto';
 
 @Component({
   selector: 'app-manage-customers',
@@ -16,11 +18,20 @@ export class ManageCustomersComponent implements OnInit {
   errorMessage;
   errorMessageCondition=false;
 
+
+  public queryResponse:QueryResponseDTO;
+  public exceptionResponse:ExceptionResponseDTO;
+  public noOfPages=[];
+
+
+  showModal=false;
+  email:any;
+
   ngOnInit(): void {
-    
+    this.getAllCustomers(1);
   }
   checkAddCustomer: boolean = false;
-  checkManageCustomer: boolean = false;
+  checkManageCustomer: boolean = true;
   public toggleAddCustomer(): void {
     if (this.checkAddCustomer == false) {
       this.checkAddCustomer = true;
@@ -50,6 +61,8 @@ export class ManageCustomersComponent implements OnInit {
     this.errorMessageCondition=false;
     console.log("Data is "+data)
     alert(data); 
+    this.getAllCustomers(1);
+    this.toggleManageCustomer();
     },
     error=>{
        /*
@@ -64,5 +77,51 @@ export class ManageCustomersComponent implements OnInit {
     this.errorMessage=error.error;
     console.log("erroor occured",error);
     });
+  }
+
+  /**
+  * Method:getAllCustomers 
+  * is to fetch customers data if admin credentials are valid
+  */
+ public getAllCustomers(pageNumber:number)
+ {
+    this.manageUsersService.getAllCustomers("Admin2@capgemini.com","Admin@123",13740,pageNumber).subscribe(
+      (data:QueryResponseDTO)=>
+      {
+        this.queryResponse=data;
+        this.noOfPages=new Array(this.queryResponse.totalNoOfPages);
+        console.log(this.queryResponse);
+
+      },(error)=>{
+        this.exceptionResponse=error.error;
+        console.log(this.exceptionResponse.reason);
+      }
+    );
+ }
+
+
+ openDialog(email)
+  {
+    this.email=email;
+    this.showModal=true;
+  }
+  closeDialog()
+  {
+    this.showModal=false;
+  }
+  deleteCustomer()
+  {
+    this.manageUsersService.deleteCustomer(this.email).subscribe(
+      data=>{
+        console.log(data);
+        this.getAllCustomers(1);
+        this.showModal=false;
+        alert("Customer Deleted Successfully");
+      },
+      error=>{
+       alert(error.error);
+       this.showModal=false;
+      }
+    )
   }
 }

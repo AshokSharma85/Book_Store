@@ -27,7 +27,6 @@
   </header>
 
   <br>
-  <div>
     <div>
       <button type="button" (click)="toggleAddAdmin()" class="btn btn-secondary">Add Admin</button>
       <button type="button" id="btn" (click)="toggleManageAdmin()" class="btn btn-secondary">Manage Admins</button>
@@ -51,7 +50,7 @@
               </div>
           <div>
          <b> Email</b>
-         <input type="email" placeholder="Enter email" id="id" name="email"  [(ngModel)]="addAdmins.email" #emailId="ngModel" required pattern="" class="form-control border border-dark" >
+         <input type="email" placeholder="Enter email" id="id" name="email"  [(ngModel)]="addAdmins.email" #emailId="ngModel" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control border border-dark" >
           <div *ngIf="emailId.invalid && emailId.touched" class="alert alert-danger">
             <span *ngIf="emailId.errors.required">*Email is Mandatory</span>
             <span *ngIf="emailId.errors.pattern">*Please Enter Valid Email</span>
@@ -81,23 +80,60 @@
         <div>
         <input type="submit" value="Submit" id="submit" [disabled]="!formdata.valid">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button  routerLink="/home"  class="btn btn-light">Cancel </button>
+        <button (click)="toggleManageAdmin()"  class="btn btn-light">Cancel </button>
       </div>
       </form>
     </div>
       </div>
     </div>
 
+    <br>
 
 
+    <!-- Kunal's Work -->
+    <div id="manage admin" *ngIf="checkManageAdmin">
+      <table class="table table-dark">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email Address</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tr *ngFor="let admin of admins">
+          <th>{{admin.adminId}}</th>
+          <th>{{admin.fullName}}</th>
+          <th>{{admin.email}}</th>
+          <th><button type="button" class="btn btn-primary">update</button></th>
+          <th><button type="button" (click)="openDialog(admin.adminId)" class="btn btn-danger">delete</button></th>
+        </tr>
+      </table>
+    </div>
+ 
+    
 
 
-
-
-
-
-
+<!-- Vaishali's Work -->
+    <div class="modal" *ngIf=showModal>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete User</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete the user?</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" (click)="deleteUser()">Delete</button>
+            <button class="btn btn-default" (click)="closeDialog()">Close</button>
+           
+          </div>
+        </div>
+      </div>
   </div>
+
 
   <footer>
     <p>Copyright (c) 2020 by Evergreen Books Co., Ltd</p>

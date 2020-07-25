@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ManageUsersService } from 'src/app/services/manage-users.service';
 import { Admin } from 'src/app/models/admin';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,10 +19,13 @@ export class ManageUsersComponent implements OnInit {
   errorMessage;
   errorMessageCondition=false;
 
+
+  showModal=false;
+  adminId:any;
+
+
   ngOnInit(): void {
-    this.manageUsersService.getAllUsers().subscribe(
-      (data)=>{this.admins=data}
-    );
+    this.getAllUsers();
   }
   
   checkAddAdmin: boolean = false;
@@ -39,6 +43,11 @@ export class ManageUsersComponent implements OnInit {
     }
   }
 
+  getAllUsers():void{
+    this.manageUsersService.getAllUsers().subscribe(
+      (data)=>{this.admins=data}
+    );
+  }
 
   addAdmin(form:NgForm):void
   {
@@ -56,7 +65,9 @@ export class ManageUsersComponent implements OnInit {
     this.errorMessageCondition=false;
     console.log("Data is "+data)
     alert(data); 
-    window.location.href="http://localhost:4201/manageadmin";
+    this.getAllUsers();
+    this.toggleManageAdmin();
+    
     },
   
     error=>
@@ -77,6 +88,43 @@ export class ManageUsersComponent implements OnInit {
   );
 
   }
+
+  
+
+  openDialog(adminId)
+  {
+    this.adminId=adminId;
+    this.showModal=true;
+
+  }
+  closeDialog()
+  {
+    this.showModal=false;
+  }
+  deleteData:string;
+
+  deleteUser()
+  {
+    this.manageUsersService.deleteUser(this.adminId).subscribe(
+      data=>{
+        this.deleteData=data;
+        console.log(this.deleteData);
+        alert("Admin Deleted Successfully");
+        this.showModal=false;
+        this.getAllUsers();
+      
+        
+      },
+      error=>{
+        alert(error.error);
+        this.showModal=false;
+      }
+    )
+  }
+
+
+
+
 
 
 }
