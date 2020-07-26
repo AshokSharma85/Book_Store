@@ -44,7 +44,7 @@ export class LoginAdminComponent implements OnInit {
       localStorage.setItem("adminId",this.admin.adminId);
       localStorage.setItem("email",this.admin.email);
       localStorage.setItem("fullName",this.admin.fullName);
-      localStorage.setItemn("password",this.admin.password);
+      localStorage.setItem("password",this.admin.password);
 
     },
     

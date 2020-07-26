@@ -52,8 +52,9 @@ export class ManageUsersComponent implements OnInit {
     this.checkManageAdmin = false;
   }
 
+  adminIdFromLocalStorage=parseInt(localStorage.getItem("adminId"));;
   getAllUsers():void{
-    this.manageUsersService.getAllUsers().subscribe(
+    this.manageUsersService.getAllUsers(this.adminIdFromLocalStorage).subscribe(
       (data)=>{this.admins=data}
     );
   }
@@ -156,10 +157,10 @@ export class ManageUsersComponent implements OnInit {
     );
   }
 
-  // signout()
-  // {
-  //   localStorage.clear();
-  // }
+  signout()
+  {
+    localStorage.clear();
+  }
 
 
 

@@ -24,6 +24,9 @@ export class ManageCustomersComponent implements OnInit {
   public noOfPages=[];
 
   adminName=localStorage.getItem("fullName");
+  adminEmail=localStorage.getItem("email");
+  adminId=parseInt(localStorage.getItem("adminId"));
+  adminPassword=localStorage.getItem("password");
 
   showModal=false;
   email:any;
@@ -99,7 +102,7 @@ export class ManageCustomersComponent implements OnInit {
   */
  public getAllCustomers(pageNumber:number)
  {
-    this.manageUsersService.getAllCustomers("ashoksharma8504@gmail.com","67Ashok@$",18789,pageNumber).subscribe(
+    this.manageUsersService.getAllCustomers(this.adminEmail,this.adminPassword,this.adminId,pageNumber).subscribe(
       (data:QueryResponseDTO)=>
       {
         this.queryResponse=data;
@@ -163,8 +166,8 @@ export class ManageCustomersComponent implements OnInit {
   }
 
   
-  // signout()
-  // {
-  //   localStorage.clear();
-  // }
+  signout()
+  {
+    localStorage.clear();
+  }
 }

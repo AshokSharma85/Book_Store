@@ -12,9 +12,10 @@ export class ManageUsersService {
   constructor(private http:HttpClient) { }
   url:string="http://localhost:1138";
 
-  getAllUsers():Observable<any>
+  getAllUsers(adminId):Observable<any>
   {
-    return this.http.get(this.url+"/admin/getallusers/18790");
+    
+    return this.http.get(this.url+"/admin/getallusers/"+adminId);
   }
 
   addAdmin(admin:Admin):Observable<any>
