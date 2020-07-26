@@ -1,0 +1,28 @@
+#btn
+{
+    float: right;
+}
+
+#submit{
+    background-color: #313a5a;
+    color: white;
+    border-radius: 10%;
+    padding:1%; 
+    
+}
+
+#formData{
+    background-color:rgb(176, 188, 199);
+    width: 90%;
+    height: 90%;
+    
+}
+b{
+    font-size: 120%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

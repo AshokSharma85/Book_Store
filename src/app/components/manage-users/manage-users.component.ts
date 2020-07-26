@@ -13,7 +13,7 @@ export class ManageUsersComponent implements OnInit {
 
   constructor(private manageUsersService:ManageUsersService) { }
   admins:Admin[]=[];
-
+  adminName=localStorage.getItem("fullName");
   addAdmins:Admin=new Admin();
   errorMessage;
   errorMessageCondition=false;
@@ -156,6 +156,10 @@ export class ManageUsersComponent implements OnInit {
     );
   }
 
+  // signout()
+  // {
+  //   localStorage.clear();
+  // }
 
 
 

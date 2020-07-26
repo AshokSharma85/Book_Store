@@ -8,7 +8,7 @@
             {{errorMessage}}
             </div>
         <div>
-       <b> Email</b>
+       <b> *Email</b>
        <input type="email" placeholder="Enter email" id="id" name="email"  [(ngModel)]="customerInformation.emailAddress" #emailId="ngModel" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control border border-dark" >
         <div *ngIf="emailId.invalid && emailId.touched" class="alert alert-danger">
           <span *ngIf="emailId.errors.required">*Email is Mandatory</span>
@@ -17,7 +17,7 @@
       
       </div>
       
-      <div><b>Full Name</b>
+      <div><b>*Full Name</b>
         <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="customerInformation.fullName" #na="ngModel" required pattern=""class="form-control border border-dark" >
         <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
           <span *ngIf="na.errors.required">*Full Name is Mandatory</span>
@@ -27,7 +27,7 @@
       </div>
      
     
-    <div><b>Password</b>
+    <div><b>*Password</b>
       <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="customerInformation.password" #pass="ngModel" required pattern =""  class="form-control border border-dark " >
       <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
         <span *ngIf="pass.errors.required">*Password is Mandatory</span>
@@ -39,7 +39,7 @@
     </div>
 
     
-    <div><b>Phone Number</b>
+    <div><b>*Phone Number</b>
         <input type="number" placeholder="Enter phone number" id="phoneNumber" name="phoneNumber"   [(ngModel)]="customerInformation.phoneNumber" #phoneNumber="ngModel" required pattern="[0-9]{10}" class="form-control border border-dark" >
         <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="alert alert-danger">
           <span *ngIf="phoneNumber.errors.required">*Phone Number is Mandatory</span>
@@ -49,7 +49,7 @@
       
       </div>
 
-      <div><b>City</b>
+      <div><b>*City</b>
           <input type="text" placeholder="Enter city" id="city" name="city"   [(ngModel)]="customerInformation.city" #city="ngModel" required pattern="[a-zA-Z]{3,32}"class="form-control border border-dark " >
           <div *ngIf="city.invalid && city.touched" class="alert alert-danger">
             <span *ngIf="city.errors.required">*City is Mandatory</span>
@@ -59,7 +59,7 @@
         
         </div>
 
-        <div><b>Zip Code</b>
+        <div><b>*Zip Code</b>
             <input type="number" placeholder="Enter Zip Code" id="zipCode" name="zipCode"   [(ngModel)]="customerInformation.zipCode" #zipCode="ngModel" required pattern="[0-9]{6}" class="form-control border border-dark" >
             <div *ngIf="zipCode.invalid && zipCode.touched" class="alert alert-danger">
               <span *ngIf="zipCode.errors.required">*Zip Code is Mandatory</span>
@@ -68,7 +68,7 @@
     
           
           </div>
-          <div><b>Country</b>
+          <div><b>*Country</b>
               <input type="text" placeholder="Enter country" id="country" name="country"   [(ngModel)]="customerInformation.country" #country="ngModel" required pattern="[a-zA-Z]{3,64}" class="form-control border border-dark " >
               <div *ngIf="country.invalid && country.touched" class="alert alert-danger">
                 <span *ngIf="country.errors.required">*Country name is Mandatory</span>
@@ -82,7 +82,10 @@
       <div>
       <input type="submit" value="Submit" id="submit" [disabled]="!formdata.valid">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button  routerLink="/"  class="btn btn-light">Cancel </button>
+      <button  routerLink="/"  class="btn btn-light">Cancel </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <b> <a routerLink="/loginadmin">Login as Admin??</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a routerLink="/logincustomer">Login as Customer??</a>
+       </b> 
     </div>
     </form>
   </div>

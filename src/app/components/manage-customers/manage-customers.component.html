@@ -14,14 +14,14 @@
     <img src="../assets/BookstoreAdminLogo.png" alt="logo">
     <ul>
       <li><a>Home</a></li>
-      <li><a>Users</a></li>
+      <li><a routerLink="/manageadmin">Users</a></li>
       <li><a>Categories</a></li>
       <li><a>Books</a></li>
-      <li><a>Customers</a></li>
+      <li><a routerLink="/managecustomer">Customers</a></li>
       <li><a>Reviews</a></li>
       <li><a>Orders</a></li>
       <li><a>Sign Out</a></li><br>
-      <span>Welcome (Customer)</span>
+      <span>Welcome {{adminName}}</span>
     </ul>
     
   </header>
@@ -37,7 +37,7 @@
                 
       <div >
       <div id="formData" class="col-xl-6 col-lg-6 col-md-5 col-sm-5 mx-auto  form p-3 jumbotron">
-         <u> <h2 class="text-center" >Create New Profile</h2></u>
+         <u> <h2 class="text-center" >Create New Customer</h2></u>
       
         <form  name="formdata" #formdata="ngForm" novalidate (ngSubmit)="addCustomer(formdata)">
       
@@ -45,7 +45,7 @@
               {{errorMessage}}
               </div>
           <div>
-         <b> Email</b>
+         <b> *Email</b>
          <input type="email" placeholder="Enter email" id="id" name="email"  [(ngModel)]="customerInformation.emailAddress" #emailId="ngModel" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control border border-dark" >
           <div *ngIf="emailId.invalid && emailId.touched" class="alert alert-danger">
             <span *ngIf="emailId.errors.required">*Email is Mandatory</span>
@@ -53,7 +53,7 @@
             </div>
         
         </div>
-        <div><b>Full Name</b>
+        <div><b>*Full Name</b>
           <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="customerInformation.fullName" #na="ngModel" required pattern=""class="form-control border border-dark" >
           <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
             <span *ngIf="na.errors.required">*Full Name is Mandatory</span>
@@ -62,7 +62,7 @@
         
         </div>
        
-      <div><b>Password</b>
+      <div><b>*Password</b>
         <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="customerInformation.password" #pass="ngModel" required pattern =""  class="form-control border border-dark " >
         <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
           <span *ngIf="pass.errors.required">*Password is Mandatory</span>
@@ -72,7 +72,7 @@
       </div>
 
       
-      <div><b>Phone Number</b>
+      <div><b>*Phone Number</b>
           <input type="number" placeholder="Enter phone number" id="phoneNumber" name="phoneNumber"   [(ngModel)]="customerInformation.phoneNumber" #phoneNumber="ngModel" required pattern="[0-9]{10}" class="form-control border border-dark" >
           <div *ngIf="phoneNumber.invalid && phoneNumber.touched" class="alert alert-danger">
             <span *ngIf="phoneNumber.errors.required">*Phone Number is Mandatory</span>
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div><b>City</b>
+        <div><b>*City</b>
             <input type="text" placeholder="Enter city" id="city" name="city"   [(ngModel)]="customerInformation.city" #city="ngModel" required pattern="[a-zA-Z]{3,32}"class="form-control border border-dark " >
             <div *ngIf="city.invalid && city.touched" class="alert alert-danger">
               <span *ngIf="city.errors.required">*City is Mandatory</span>
@@ -88,7 +88,7 @@
               </div>
           </div>
 
-          <div><b>Zip Code</b>
+          <div><b>*Zip Code</b>
               <input type="number" placeholder="Enter Zip Code" id="zipCode" name="zipCode"   [(ngModel)]="customerInformation.zipCode" #zipCode="ngModel" required pattern="[0-9]{6}" class="form-control border border-dark" >
               <div *ngIf="zipCode.invalid && zipCode.touched" class="alert alert-danger">
                 <span *ngIf="zipCode.errors.required">*Zip Code is Mandatory</span>
@@ -96,7 +96,7 @@
                 </div>
       
             </div>
-            <div><b>Country</b>
+            <div><b>*Country</b>
                 <input type="text" placeholder="Enter country" id="country" name="country"   [(ngModel)]="customerInformation.country" #country="ngModel" required pattern="[a-zA-Z]{3,64}" class="form-control border border-dark " >
                 <div *ngIf="country.invalid && country.touched" class="alert alert-danger">
                   <span *ngIf="country.errors.required">*Country name is Mandatory</span>
@@ -149,7 +149,7 @@
                 <td>{{customer.country}}</td>
                 <!-- (click)="updateCustomer(customer)"
                 (click)="deleteCustomer(customer)" -->
-                <td><button type="button" class="btn btn-primary" >Update</button>&nbsp;
+                <td><button type="button" class="btn btn-primary" (click)="this.toggleEditCustomer(customer.emailAddress);" >Update</button>&nbsp;
                 <button type="button" class="btn btn-danger" (click)="openDialog(customer.emailAddress)" >Delete</button></td>
             </tr>
             <tr>
@@ -184,6 +184,71 @@
        
       </div>
     </div>
+  </div>
+</div>
+<!-- 
+nikhil's work -->
+<div id="edit customer" *ngIf="checkEditCustomer">
+                
+  <div >
+  <div id="formData" class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto  form p-3 jumbotron">
+     <u> <h2 class="text-center" >Update Customer</h2></u>
+  
+    <form  name="formdata" #formdata="ngForm" novalidate (ngSubmit)="editCustomer(formdata)">
+  
+        <div *ngIf="errorMessageCondition" class="alert alert-danger">
+          {{errorMessage}}
+          </div>
+      
+    <div><b>*Full Name</b>
+      <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="customerInformation.fullName" #na="ngModel" required class="form-control border border-dark" >
+      <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
+        <span *ngIf="na.errors.required">*Full Name is Mandatory</span>
+      
+        </div>
+    
+    </div>
+
+  <div><b>*Phone Number</b>
+    <input type="nummber" placeholder="Enter password" id="password" name="password"   [(ngModel)]="customerInformation.phoneNumber" #pass="ngModel" required pattern =""  class="form-control border border-dark " >
+    <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
+      <span *ngIf="pass.errors.required">*Phone Number is Mandatory</span>
+      </div>
+  </div>
+
+  <div><b>*City</b>
+    <input type="text" placeholder="Enter city" id="city" name="city"   [(ngModel)]="customerInformation.city" #city="ngModel" required pattern="[a-zA-Z]{3,32}"class="form-control border border-dark " >
+    <div *ngIf="city.invalid && city.touched" class="alert alert-danger">
+      <span *ngIf="city.errors.required">*City is Mandatory</span>
+      <span *ngIf="city.errors.pattern">*Please Enter Valid City Name</span>
+      </div>
+  </div>
+
+  <div><b>*Zip Code</b>
+      <input type="number" placeholder="Enter Zip Code" id="zipCode" name="zipCode"   [(ngModel)]="customerInformation.zipCode" #zipCode="ngModel" required pattern="[0-9]{6}" class="form-control border border-dark" >
+      <div *ngIf="zipCode.invalid && zipCode.touched" class="alert alert-danger">
+        <span *ngIf="zipCode.errors.required">*Zip Code is Mandatory</span>
+        <span *ngIf="zipCode.errors.pattern">*Please Enter Valid Zip Code</span>
+        </div>
+
+    </div>
+    <div><b>*Country</b>
+        <input type="text" placeholder="Enter country" id="country" name="country"   [(ngModel)]="customerInformation.country" #country="ngModel" required pattern="[a-zA-Z]{3,64}" class="form-control border border-dark " >
+        <div *ngIf="country.invalid && country.touched" class="alert alert-danger">
+          <span *ngIf="country.errors.required">*Country name is Mandatory</span>
+          <span *ngIf="country.errors.pattern">*Please Enter Valid Country Name</span>
+          </div>
+
+            </div>
+
+
+    <div>
+    <input type="submit" value="Submit" id="submit" [disabled]="!formdata.valid">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button (click)="toggleManageCustomer()"  class="btn btn-light">Cancel </button>
+  </div>
+  </form>
+</div>
   </div>
 </div>
 

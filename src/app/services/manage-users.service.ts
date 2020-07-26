@@ -14,7 +14,7 @@ export class ManageUsersService {
 
   getAllUsers():Observable<any>
   {
-    return this.http.get(this.url+"/admin/getallusers/13740");
+    return this.http.get(this.url+"/admin/getallusers/18790");
   }
 
   addAdmin(admin:Admin):Observable<any>
@@ -45,5 +45,20 @@ export class ManageUsersService {
 
   editAdmin(adminId: number,admin:Admin){
     return this.http.put(this.url+"/admin/editAdmin/"+adminId,admin,{responseType:'text'});
-}
+  }
+
+  editCustomer(email:any,customerInformation:CustomerInformation){
+    console.log(email);
+    return this.http.put(this.url+"/admin/updatecustomer/"+email,customerInformation,{responseType:'text'});
+  }
+
+  loginAdmin(email:string, password:string)
+  {
+    return this.http.get(this.url+"/adminlogin?email="+email+"&password="+password);
+  }
+
+  loginCustomer(email:string, password:string)
+  {
+    return this.http.get(this.url+"/customerlogin?email="+email+"&password="+password);
+  }
 }

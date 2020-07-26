@@ -17,12 +17,13 @@ export class ManageCustomersComponent implements OnInit {
   customerInformation:CustomerInformation=new CustomerInformation();
   errorMessage;
   errorMessageCondition=false;
-
+  updateEmail: any;
 
   public queryResponse:QueryResponseDTO;
   public exceptionResponse:ExceptionResponseDTO;
   public noOfPages=[];
 
+  adminName=localStorage.getItem("fullName");
 
   showModal=false;
   email:any;
@@ -32,17 +33,30 @@ export class ManageCustomersComponent implements OnInit {
   }
   checkAddCustomer: boolean = false;
   checkManageCustomer: boolean = true;
+  checkEditCustomer: boolean = false;
   public toggleAddCustomer(): void {
     if (this.checkAddCustomer == false) {
       this.checkAddCustomer = true;
       this.checkManageCustomer = false;
+      this.checkEditCustomer=false;
     }
   }
   public toggleManageCustomer(): void {
     if (this.checkManageCustomer == false) {
       this.checkAddCustomer = false;
       this.checkManageCustomer = true;
+      this.checkEditCustomer=false;
     }
+  }
+
+  
+  public toggleEditCustomer(updateEmail): void {
+    
+      this.updateEmail=updateEmail;
+      this.checkAddCustomer = false;
+      this.checkManageCustomer = false;
+      this.checkEditCustomer=true;
+  
   }
 
   addCustomer(form:NgForm):void
@@ -85,7 +99,7 @@ export class ManageCustomersComponent implements OnInit {
   */
  public getAllCustomers(pageNumber:number)
  {
-    this.manageUsersService.getAllCustomers("Admin2@capgemini.com","Admin@123",13740,pageNumber).subscribe(
+    this.manageUsersService.getAllCustomers("ashoksharma8504@gmail.com","67Ashok@$",18789,pageNumber).subscribe(
       (data:QueryResponseDTO)=>
       {
         this.queryResponse=data;
@@ -124,4 +138,33 @@ export class ManageCustomersComponent implements OnInit {
       }
     )
   }
+
+  editCustomer(form: NgForm){
+
+    
+    this.manageUsersService.editCustomer(this.updateEmail,this.customerInformation).subscribe(data=>
+      {
+      form.resetForm();
+      this.errorMessageCondition=false;
+      console.log("Data is "+data)
+      alert(data); 
+      this.getAllCustomers(1);
+      this.toggleManageCustomer();
+      
+      },
+    
+      error=>
+    {
+      this.errorMessageCondition=true;
+      this.errorMessage=error.error;
+      console.log("erroor occured",error);
+    }
+    );
+  }
+
+  
+  // signout()
+  // {
+  //   localStorage.clear();
+  // }
 }

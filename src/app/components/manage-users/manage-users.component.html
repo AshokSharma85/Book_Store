@@ -14,14 +14,14 @@
     <img src="../assets/BookstoreAdminLogo.png" alt="logo">
     <ul>
       <li><a>Home</a></li>
-      <li><a>Users</a></li>
+      <li><a routerLink="/manageadmin">Users</a></li>
       <li><a>Categories</a></li>
       <li><a>Books</a></li>
-      <li><a>Customers</a></li>
+      <li><a routerLink="/managecustomer">Customers</a></li>
       <li><a>Reviews</a></li>
       <li><a>Orders</a></li>
       <li><a>Sign Out</a></li><br>
-      <span>Welcome (Admin)</span>
+      <span>Welcome {{adminName}}</span>
     </ul>
     
   </header>
@@ -49,7 +49,7 @@
               {{errorMessage}}
               </div>
           <div>
-         <b> Email</b>
+         <b> *Email</b>
          <input type="email" placeholder="Enter email" id="id" name="email"  [(ngModel)]="addAdmins.email" #emailId="ngModel" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control border border-dark" >
           <div *ngIf="emailId.invalid && emailId.touched" class="alert alert-danger">
             <span *ngIf="emailId.errors.required">*Email is Mandatory</span>
@@ -58,7 +58,7 @@
         
         </div>
         <br>
-        <div><b>Full Name</b>
+        <div><b>*Full Name</b>
           <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="addAdmins.fullName" #na="ngModel" required class="form-control border border-dark" >
           <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
             <span *ngIf="na.errors.required">*Full Name is Mandatory</span>
@@ -67,7 +67,7 @@
         
         </div>
       <br>
-      <div><b>Password</b>
+      <div><b>*Password</b>
         <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="addAdmins.password" #pass="ngModel" required pattern =""  class="form-control border border-dark " >
         <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
           <span *ngIf="pass.errors.required">*Password is Mandatory</span>
@@ -93,7 +93,7 @@
     <!-- Kunal's Work -->
     <div class="container" *ngIf="checkManageAdmin">
       <table class=" table table-borderless" >
-        <thead>
+        <thead style="background-color:#313a5a;color: white">
           <tr>
             <th>ID</th>
             <th>Name</th>
@@ -152,7 +152,7 @@
             </div>
         <div>
        
-       <b> Email</b>
+       <b> *Email</b>
        <input type="email" placeholder="Enter email" id="id" name="email"  [(ngModel)]="addAdmins.email" #emailId="ngModel" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control border border-dark" >
         <div *ngIf="emailId.invalid && emailId.touched" class="alert alert-danger">
           <span *ngIf="emailId.errors.required">*Email is Mandatory</span>
@@ -161,7 +161,7 @@
       
       </div>
       <br>
-      <div><b>Full Name</b>
+      <div><b>*Full Name</b>
         <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="addAdmins.fullName" #na="ngModel" required class="form-control border border-dark" >
         <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
           <span *ngIf="na.errors.required">*Full Name is Mandatory</span>
@@ -170,7 +170,7 @@
       
       </div>
     <br>
-    <div><b>Password</b>
+    <div><b>*Password</b>
       <input type="password" placeholder="Enter password" id="password" name="password"   [(ngModel)]="addAdmins.password" #pass="ngModel" required pattern =""  class="form-control border border-dark " >
       <div *ngIf="pass.invalid && pass.touched" class="alert alert-danger">
         <span *ngIf="pass.errors.required">*Password is Mandatory</span>
@@ -190,7 +190,7 @@
     </div>
   </div>
 
-  
+
   <footer>
     <p>Copyright (c) 2020 by Evergreen Books Co., Ltd</p>
   </footer>
