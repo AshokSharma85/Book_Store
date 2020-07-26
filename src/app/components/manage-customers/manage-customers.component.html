@@ -201,7 +201,7 @@ nikhil's work -->
           </div>
       
     <div><b>*Full Name</b>
-      <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="customerInformation.fullName" #na="ngModel" required class="form-control border border-dark" >
+      <input type="text" placeholder="Enter full name" id="name" name="name"   [(ngModel)]="customerInformation.fullName"    #na="ngModel" required class="form-control border border-dark" >
       <div *ngIf="na.invalid && na.touched" class="alert alert-danger">
         <span *ngIf="na.errors.required">*Full Name is Mandatory</span>
       
