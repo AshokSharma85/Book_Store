@@ -20,7 +20,7 @@
       <li><a routerLink="/managecustomer">Customers</a></li>
       <li><a>Reviews</a></li>
       <li><a>Orders</a></li>
-      <li><a routerLink="/" (click)="signout()">Sign Out</a></li><br>
+      <li><a routerLink="/logincustomer" (click)="signout()">Sign Out</a></li><br>
       <span>Welcome {{adminName}}</span>
     </ul>
     
@@ -126,7 +126,7 @@
     </div>
     <img *ngIf="queryResponse==null" src="../../assets/no-data-found.png" alt="No Customers Found!" height="460" width="460">
     <table class="table table-borderless" *ngIf="queryResponse!=null">
-        <thead class="thead-dark">
+        <thead style="background-color:#313a5a;color: white">
             <tr>
               <th>CustomerId</th>
               <th>Email Address</th>
