@@ -1,2 +1,36 @@
 
+<header>
+    <img src="../assets/BookstoreAdminLogo.png" alt="logo">
+    
+    
+    <ul *ngIf="showAdmin">
+     
+      <li><a routerLink="/manageadmin">Users</a></li>
+      <li><a>Categories</a></li>
+      <li><a>Books</a></li>
+      <li><a routerLink="/managecustomer">Customers</a></li>
+      <li><a>Reviews</a></li>
+      <li><a>Orders</a></li>
+      <li><a routerLink="/login" (click)="signout()">Sign Out</a></li><br>
+      <span>Welcome {{adminName}}</span>
+    </ul>
+    
+    <ul *ngIf="showCustomer">
+     <li><a>Myprofile</a></li>
+        <li><a>Order</a></li>
+        <li><a routerLink="/login" (click)="signout()">Sign Out</a></li><br>
+      </ul>
+
+
+      
+    <ul *ngIf="withoutLogin">
+        <li><a>Home</a></li>
+           <li><a>Books</a></li>
+           <li><a routerLink="/login" (click)="signout()">Sign in</a></li><br>
+         </ul>
+  </header>
 <router-outlet></router-outlet>
+
+<footer>
+    <p>Copyright (c) 2020 by Evergreen Books Co., Ltd</p>
+  </footer>

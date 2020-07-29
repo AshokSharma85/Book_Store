@@ -5,7 +5,8 @@ export class CustomerInformation {
     password:string;
     phoneNumber:number;
     city:string;
+    address:string;
     zipCode:number;
     country:string;
-    regsiterDate:string;
+    registerDate:string;
 }

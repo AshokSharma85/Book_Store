@@ -1,5 +1,10 @@
+<br>
+<br>
+
 <div id="formData" class="col-xl-6 col-lg-6 col-md-5 col-sm-5 mx-auto  form p-3 jumbotron">
-    <u> <h2 class="text-center" >Admin Login</h2></u>
+
+
+    <u> <h2 class="text-center" >Login</h2></u>
     <div class="alert alert-danger" *ngIf="checkError">
       {{errorMessage}}
    </div>
@@ -29,8 +34,8 @@
          <input type="submit" value="Submit" id="submit" [disabled]="!formdata.valid">
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <button  routerLink="/"  class="btn btn-light">Cancel </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <b> <a routerLink="/logincustomer">Login as Customer??</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <a routerLink="/createcustomer">Sign up as Customer??</a>
+      <b>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <u>  <a routerLink="/createcustomer">SignUp</a></u>
         </b>  
        </div>
  </form>

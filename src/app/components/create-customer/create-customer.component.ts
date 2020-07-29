@@ -33,7 +33,7 @@ export class CreateCustomerComponent implements OnInit {
     this.errorMessageCondition=false;
     console.log("Data is "+data)
     alert("Profile Created SuccessFully Please Login to continue...");
-    window.location.href="/logincustomer"; 
+    window.location.href="/login"; 
     },
     error=>{
        /*

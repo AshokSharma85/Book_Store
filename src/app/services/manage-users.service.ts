@@ -25,6 +25,7 @@ export class ManageUsersService {
 
   addCustomer(customerInformartion:CustomerInformation):Observable<any>
   {
+    console.log(customerInformartion.address +" "+ customerInformartion.city);
     return this.http.post(this.url+"/admin/addcustomers",customerInformartion,{responseType:'text'});
   }
 

@@ -59,6 +59,17 @@
         
         </div>
 
+        
+      <div><b>*Address</b>
+        <input type="text" placeholder="Enter address" id="address" name="address"   [(ngModel)]="customerInformation.address" #address="ngModel" required pattern="" class="form-control border border-dark " >
+        <div *ngIf="address.invalid && address.touched" class="alert alert-danger">
+          <span *ngIf="address.errors.required">*Address is Mandatory</span>
+          <span *ngIf="address.errors.pattern">*Please Enter  Complete Address</span>
+          </div>
+
+      
+      </div>
+
         <div><b>*Zip Code</b>
             <input type="number" placeholder="Enter Zip Code" id="zipCode" name="zipCode"   [(ngModel)]="customerInformation.zipCode" #zipCode="ngModel" required pattern="[0-9]{6}" class="form-control border border-dark" >
             <div *ngIf="zipCode.invalid && zipCode.touched" class="alert alert-danger">
@@ -83,8 +94,7 @@
       <input type="submit" value="Submit" id="submit" [disabled]="!formdata.valid">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button  routerLink="/"  class="btn btn-light">Cancel </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <b> <a routerLink="/loginadmin">Login as Admin??</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a routerLink="/logincustomer">Login as Customer??</a>
+      <b> <a routerLink="/login">Login </a>
        </b> 
     </div>
     </form>

@@ -10,8 +10,7 @@ const appRoutes:Routes=[
   {path:'manageadmin',component:ManageUsersComponent},
   {path:'managecustomer',component:ManageCustomersComponent},
   {path:'createcustomer',component:CreateCustomerComponent},
-  {path:'logincustomer',component:LoginCustomerComponent},
-  {path:'loginadmin',component:LoginAdminComponent}
+  {path:'login',component:LoginAdminComponent}
 ]
 
 

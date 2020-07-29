@@ -8,7 +8,7 @@ import { ManageUsersService } from '../../services/manage-users.service';
   styleUrls: ['./login-admin.component.css']
 })
 export class LoginAdminComponent implements OnInit {
-
+  customer:any;
   admin:any;
   email:string;
   password:string;
@@ -45,14 +45,40 @@ export class LoginAdminComponent implements OnInit {
       localStorage.setItem("email",this.admin.email);
       localStorage.setItem("fullName",this.admin.fullName);
       localStorage.setItem("password",this.admin.password);
+      localStorage.setItem("role","admin");
 
     },
     
     (error)=>
-    {this.errorMessage=error.error;
-      this.checkError=true;
+    {console.log(this.email);
+      console.log(this.password);
       this.checkInfo=false;
-    });
-  }
+      this.checkError=false;
+      this.service.loginCustomer(this.email,this.password).subscribe(
+      (data)=>
+      { 
+        form.reset();
+        this.customer=data;
+        this.checkInfo=true;
+        this.checkError=false;
+        alert("LoggedIn Succesfully")
+        console.log(this.customer);
+         window.location.href="/manageadmin";
+         localStorage.setItem("email",this.customer.emailAddress);
+        localStorage.setItem("fullName",this.customer.fullName);
+        localStorage.setItem("role","customer");
+
+      },
+      
+      (error)=>
+      {this.errorMessage=error.error;
+        this.checkError=true;
+        this.checkInfo=false;
+      });
+    }
+  
+  
+  );
+}
 
 }
